@@ -1,12 +1,18 @@
 // server.js
 import express from "express";
 import cors from "cors";
+const app = express();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
-app.use(cors());                 // allow requests from your frontend
-app.use(express.json());         // parse JSON body
+
+app.use(cors({
+  origin: "https://deep2117.github.io/blog/", // your frontend URL
+  methods: ["GET", "POST"],
+  credentials: true
+}));        // parse JSON body
 
 // simple health check
 app.get("/api/health", (req, res) => {
